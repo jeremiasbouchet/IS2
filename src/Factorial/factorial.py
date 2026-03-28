@@ -8,11 +8,8 @@
 import sys
 
 def factorial(num): 
-    if num < 0: 
-        print("Factorial de un número negativo no existe")
-        return 0
-    elif num == 0: 
-        return 1
+    if num < 0: return 0
+    elif num == 0: return 1
     else: 
         fact = 1
         while(num > 1): 
@@ -21,9 +18,22 @@ def factorial(num):
         return fact 
 
 if len(sys.argv) < 2:
-    entrada = input("No se detectó argumento. Ingrese el número (o rango): ")
+    entrada = input("Ingrese número desde el 4 al 8: ")
 else:
     entrada = sys.argv[1]
 
-num = int(entrada)
-print("Factorial ", num, "! es ", factorial(num))
+
+if "-" in entrada:
+    partes = entrada.split("-")
+   
+    if partes[0] != "" and partes[1] != "":
+        desde = int(partes[0])
+        hasta = int(partes[1])
+        for i in range(desde, hasta + 1):
+            print(f"Factorial de {i}! es {factorial(i)}")
+    else:
+        print("Formato de rango no soportado.")
+else:
+    
+    num = int(entrada)
+    print(f"Factorial de {num}! es {factorial(num)}")
